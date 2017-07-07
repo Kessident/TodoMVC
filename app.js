@@ -88,20 +88,20 @@ app.patch("/api/todos/:id", function(req, res){
     } else {
       res.status(403).send("No Todo Found");
     }
-    }).cathc(function (err) {
+  }).catch(function (err) {
     res.status(400).send("Bad Request. Try again. Err: ", err);
   });
 });
 
 app.delete("/api/todos/:id", function(req, res){
-  Todo.remove({order:req.params.id}).then(function (todo) {
+  Todo.remove({_id:req.params.id}).then(function (todo) {
     if (todo) {
       res.setHeader("Content-Type", "application/json");
       res.status(203).json(todo);
     } else {
       res.status(403).send("No Todo Found");
     }
-  }).cathc(function (err) {
+  }).catch(function (err) {
     res.status(400).send("Bad Request. Try again. Err: ", err);
   });
 });
