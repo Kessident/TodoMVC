@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + "/static/index.html");
 });
 
-app.get("/api/todos",function (req,res) {
+app.get("/api/todos/",function (req,res) {
   Todo.find().then(function (data) {
     if (data){
       res.setHeader('Content-Type', 'application/json');
@@ -27,7 +27,7 @@ app.get("/api/todos",function (req,res) {
   });
 });
 
-app.post("/api/todos", function(req, res){
+app.post("/api/todos/", function(req, res){
   let newTodo = {
     title:req.body.title,
     completed: req.body.completed,
@@ -36,7 +36,7 @@ app.post("/api/todos", function(req, res){
   Todo.create(newTodo).then(function (todo) {
     if (todo){
       res.setHeader("Content-Type", "application/json");
-      res.status(200).json(todo);
+      res.status(200).redirect("/api/todos/");
     } else {
       res.status(403).send("No Todo Found");
     }
